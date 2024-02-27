@@ -1,0 +1,55 @@
+import java.util.Scanner;
+public class BaseConversion{
+	
+    public static void main(String[] args){
+		
+        Scanner scanner = new Scanner(System.in);
+
+        //get the input from the user
+        System.out.print("Enter the decimal number: ");
+        int decimal = scanner.nextInt();
+
+        System.out.print("Enter the base (2-16): ");
+        int base = scanner.nextInt();
+
+        //cheecking the inputs
+        if(decimal < 0 || base < 2 || base > 16){
+            System.out.println("Invalid input. The decimal number must be non-negative and the base must be between 2 and 16.");
+            return;
+        }
+
+        //calling the method
+        String result = convertToBase(decimal, base);
+
+        //output the result
+        System.out.println("The equivalent base-" + base + " value of decimal " + decimal + " is: " + result);
+    }
+
+    //method to convert decimal to any base
+	private static String convertToBase(int decimal, int base){
+		
+		StringBuilder result = new StringBuilder();
+
+		while(decimal > 0){
+		
+			int remainder = decimal % base;
+		
+			if(remainder < 10){
+			
+				result.insert(0, remainder);
+			
+			}
+			else{
+			
+				char digit = (char)('A' + remainder - 10);
+				result.insert(0, digit);
+			
+			}
+		
+			decimal /= base;
+		}
+
+		return result.toString();
+	
+	}
+}
